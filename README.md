@@ -18,4 +18,5 @@ So we made a small program, that will do it for you. Only one input: your income
 
 ## Changelog
 v. 0.89.9 - GUI improvments
+
 v. 0.89 - Test version
