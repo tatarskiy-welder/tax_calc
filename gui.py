@@ -7,15 +7,24 @@ class Example(Frame, TaxProfile):
     def __init__(self, parent):
         TaxProfile.__init__(self)
         Frame.__init__(self, parent, background="lightblue")
+        parent.minsize(width=500, height=200)
+        parent.maxsize(width=500, height=200)
         self.parent = parent
         self.initUI()
 
     def output(self, event):
+        default = "0"
+        self.entry_fond["text"] = default
+        self.entry_pfr["text"] = default
+        self.entry_usn["text"] = default
         try:
             self.set_revenue(int(self.entry_dohod.get()))
-            self.entry_fond["text"] = self.get_oms()
-            self.entry_pfr["text"] = self.get_pfr()
-            self.entry_usn["text"] = self.get_usn()
+            if int(self.entry_dohod.get()) <= 0:
+                mb.showerror("Error", "Введите число в графу доход")
+            else:
+                self.entry_fond["text"] = self.get_oms()
+                self.entry_pfr["text"] = self.get_pfr()
+                self.entry_usn["text"] = self.get_usn()
         except ValueError:
             mb.showerror("Error", "Введите число в графу доход")
 
@@ -23,41 +32,42 @@ class Example(Frame, TaxProfile):
         self.parent.title("Калькулятор налогов")
         self.pack(fill=BOTH, expand=True)
 
-        self.columnconfigure(1, weight=1)
-        self.columnconfigure(5, pad=7)
-        self.rowconfigure(3, weight=1)
-        self.rowconfigure(5, pad=7)
+        self.columnconfigure(4, weight=2)
+        dohod = Label(self, text="Доход:", bg="lightblue", bd=5,
+                      relief="groove", font=("Helvetica", 12))
+        dohod.grid(sticky=W, pady=4, padx=10, column=0, row=1)
 
-        dohod = Label(self, text="Доход:")
-        dohod.grid(sticky=W + N, pady=4, padx=5, column=0, row=4)
+        nalog = Label(self, text="Налоги:", bg="lightblue", bd=5,
+                      relief="groove", font=("Helvetica", 12))
+        nalog.grid(sticky=W, pady=10, padx=10, column=2, row=0)
 
-        nalog = Label(self, text="Налоги:")
-        nalog.grid(sticky=W + N, pady=4, padx=5, column=3, row=0)
+        usn = Label(self, text="УСН:", bg="lightblue", bd=5,
+                    relief="groove", font=("Helvetica", 12))
+        usn.grid(sticky=W, pady=4, padx=10, column=2, row=1)
 
-        usn = Label(self, text="УСН:")
-        usn.grid(sticky=W + N, pady=4, padx=5, column=3, row=1)
+        pfr = Label(self, text="ПФР:", bg="lightblue", bd=5,
+                    relief="groove", font=("Helvetica", 12))
+        pfr.grid(sticky=W, pady=4, padx=10, column=2, row=2)
 
-        pfr = Label(self, text="ПФР:")
-        pfr.grid(sticky=W + N, pady=4, padx=5, column=3, row=2)
-
-        fond = Label(self, text="ФФОМС:")
-        fond.grid(sticky=W + N, pady=4, padx=5, column=3, row=3)
+        fond = Label(self, text="ФФОМС:", bg="lightblue", bd=5,
+                     relief="groove", font=("Helvetica", 12))
+        fond.grid(sticky=W + N, pady=4, padx=10, column=2, row=3)
 
         self.entry_dohod = Entry(self)
-        self.entry_dohod.grid(sticky=W + N, pady=4, padx=5, column=1, row=4)
+        self.entry_dohod.grid(sticky=W, pady=4, padx=5, column=1, row=1)
 
         self.entry_usn = Label(self, text=self.get_usn(), bg="white", width=15)
-        self.entry_usn.grid(sticky=W + N, pady=4, padx=5, column=4, row=1)
+        self.entry_usn.grid(sticky=W + N, pady=4, padx=5, column=3, row=1)
 
         self.entry_pfr = Label(self, text=self.get_pfr(), width=15, bg="white")
-        self.entry_pfr.grid(sticky=W + N, pady=4, padx=5, column=4, row=2)
+        self.entry_pfr.grid(sticky=W + N, pady=4, padx=5, column=3, row=2)
 
         self.entry_fond = Label(
             self, text=self.get_oms(), width=15, bg="white")
-        self.entry_fond.grid(sticky=W + N, pady=4, padx=5, column=4, row=3)
+        self.entry_fond.grid(sticky=W + N, pady=4, padx=5, column=3, row=3)
 
         ras = Button(self, text="Рассчитать", width=30)
-        ras.grid(row=4, column=2, sticky=W + S + N + E)
+        ras.grid(row=3, column=0, columnspan=2, sticky=W + S + E + N, padx=10)
 
         ras.bind("<Button-1>", self.output)
 
@@ -77,7 +87,9 @@ class Example(Frame, TaxProfile):
 
 def main():
     root = Tk()
+    root.iconbitmap(r'py.ico')
     app = Example(root)
+    root.resizable(width=False, height=False)
     root.mainloop()
 
 
