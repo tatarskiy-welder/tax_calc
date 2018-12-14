@@ -15,3 +15,6 @@ So we made a small program, that will do it for you. Only one input: your income
 1. Start gui.py
 2. Input your revenue in the form, press the button
 3. Pay your taxes
+
+## Changelog
+v. 0.89 - Test version
