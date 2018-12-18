@@ -12,7 +12,83 @@ class Example(Frame, TaxProfile):
         self.parent = parent
         self.initUI()
 
+    def getThoseNumbers(self):
+                self.__revenue_last = self.entry1.get()
+                self.__pfr_paid = self.entry2.get()
+                self.__oms_paid = self.entry3.get()
+                self.__usn_paid = self.entry4.get()
+                self.top.destroy()
+
+    def kvartal_windows(self):
+
+        self.__kvartal = int(self.entry_kvartal.get())
+
+        self.top_start.destroy()
+
+        if self.__kvartal == 1:
+            return
+
+        try:
+            self.top = Toplevel()
+            self.top.title("Начало работы")
+            label1 = Message(
+                self.top, text="Данные за предыдущие кварталы")
+            label1.pack()
+
+            label2 = Message(self.top, text="Введите доход:")
+            label2.pack()
+            self.entry1 = Entry(self.top)
+            self.entry1.pack()
+
+            label3 = Message(self.top, text="Введите УСН:")
+            label3.pack()
+            self.entry2 = Entry(self.top)
+            self.entry2.pack()
+
+            label4 = Message(self.top, text="Введите ПФР:")
+            label4.pack()
+            self.entry3 = Entry(self.top)
+            self.entry3.pack()
+
+            label5 = Message(self.top, text="Введите ФФОМС:")
+            label5.pack()
+            self.entry4 = Entry(self.top)
+            self.entry4.pack()
+
+            button = Button(self.top, text="Дальше",
+                            command=self.getThoseNumbers)
+            button.pack()
+
+        except ValueError:
+            mb.showerror("Error", "Введите число в графу доход")
+
+    def start_window(self):
+        def closing(self):
+            self.top_start.destroy()
+
+        self.top_start = Toplevel()
+        self.top_start.title("Начало работы")
+
+        msg = Message(self.top_start, text="Введите текущий квартал")
+        msg.pack()
+        self.entry_kvartal = Entry(self.top_start)
+        self.entry_kvartal.pack()
+
+        button = Button(
+            self.top_start, text="С учетом предыдущих кварталов",
+            command=self.kvartal_windows)
+        button.pack()
+
     def output(self, event):
+        # top = Toplevel()
+        # top.title("About this application...")
+
+        # msg = Message(top, text="Some testing stuff, nothing to do here")
+        # msg.pack()
+
+        # button = Button(top, text="Dismiss", command=top.destroy)
+        # button.pack()
+
         default = "0"
         self.entry_fond["text"] = default
         self.entry_pfr["text"] = default
@@ -35,22 +111,27 @@ class Example(Frame, TaxProfile):
         self.columnconfigure(4, weight=2)
         dohod = Label(self, text="Доход:", bg="lightblue", bd=5,
                       relief="groove", font=("Helvetica", 12))
+
         dohod.grid(sticky=W, pady=4, padx=10, column=0, row=1)
 
         nalog = Label(self, text="Налоги:", bg="lightblue", bd=5,
                       relief="groove", font=("Helvetica", 12))
+
         nalog.grid(sticky=W, pady=10, padx=10, column=2, row=0)
 
         usn = Label(self, text="УСН:", bg="lightblue", bd=5,
                     relief="groove", font=("Helvetica", 12))
+
         usn.grid(sticky=W, pady=4, padx=10, column=2, row=1)
 
         pfr = Label(self, text="ПФР:", bg="lightblue", bd=5,
                     relief="groove", font=("Helvetica", 12))
+
         pfr.grid(sticky=W, pady=4, padx=10, column=2, row=2)
 
         fond = Label(self, text="ФФОМС:", bg="lightblue", bd=5,
                      relief="groove", font=("Helvetica", 12))
+
         fond.grid(sticky=W + N, pady=4, padx=10, column=2, row=3)
 
         self.entry_dohod = Entry(self)
@@ -68,6 +149,8 @@ class Example(Frame, TaxProfile):
 
         ras = Button(self, text="Рассчитать", width=30)
         ras.grid(row=3, column=0, columnspan=2, sticky=W + S + E + N, padx=10)
+
+        self.start_window()
 
         ras.bind("<Button-1>", self.output)
 
