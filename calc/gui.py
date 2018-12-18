@@ -12,7 +12,7 @@ class Example(Frame, TaxProfile):
         self.parent = parent
         self.initUI()
 
-    def getThoseNumbers(self):
+    def get_those_numbers(self):
                 self.set_revenue_last(int(self.entry1.get()))
                 self.set_usn_paid(int(self.entry2.get()))
                 self.set_oms_paid(int(self.entry3.get()))
@@ -56,7 +56,7 @@ class Example(Frame, TaxProfile):
             self.entry4.pack()
 
             button = Button(self.top, text="Дальше",
-                            command=self.getThoseNumbers)
+                            command=self.get_those_numbers())
             button.pack()
 
         except ValueError:
