@@ -17,6 +17,8 @@ So we made a small program, that will do it for you. Only one input: your income
 3. Pay your taxes
 
 ## Changelog
+v. 0.9 - Pre-release on GitHub
+
 v. 0.89.9 - GUI improvments
 
 v. 0.89 - Test version
