@@ -13,19 +13,19 @@ class Example(Frame, TaxProfile):
         self.initUI()
 
     def getThoseNumbers(self):
-                self.__revenue_last = self.entry1.get()
-                self.__pfr_paid = self.entry2.get()
-                self.__oms_paid = self.entry3.get()
-                self.__usn_paid = self.entry4.get()
+                self.set_revenue_last(int(self.entry1.get()))
+                self.set_usn_paid(int(self.entry2.get()))
+                self.set_oms_paid(int(self.entry3.get()))
+                self.set_pfr_paid(int(self.entry4.get()))
                 self.top.destroy()
 
     def kvartal_windows(self):
 
-        self.__kvartal = int(self.entry_kvartal.get())
+        self.kvartal = int(self.entry_kvartal.get())
 
         self.top_start.destroy()
 
-        if self.__kvartal == 1:
+        if self.kvartal == 1:
             return
 
         try:

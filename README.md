@@ -13,10 +13,12 @@ So we made a small program, that will do it for you. Only one input: your income
 2. Tkinter for Python 3
 ## Quick start
 1. Run gui.py
-2. Input your income in the form, press the button
+2. Follow the instructions
 3. Pay your taxes
 
 ## Changelog
+v. 0.96 - Fully-tested version with temporary GUI
+
 v. 0.95 - Untested pre-release version
 
 v. 0.9 - Pre-release on GitHub

@@ -16,10 +16,31 @@ class TaxProfile():
         self.__pfr_paid = 0
         self.__oms_paid = 0
         self.__usn_paid = 0
-        self.__kvartal = 0
+        self.kvartal = 0
+
+    def get_revenue_last(self):
+        return self.__revenue_last
 
     def get_usn_paid(self):
         return self.__usn_paid
+
+    def get_pfr_paid(self):
+        return self.__pfr_paid
+
+    def get_oms_paid(self):
+        return self.__oms_paid
+
+    def set_revenue_last(self, revenue):
+        self.__revenue_last = revenue
+
+    def set_pfr_paid(self, pfr):
+        self.__pfr_paid = pfr
+
+    def set_oms_paid(self, oms):
+        self.__oms_paid = oms
+
+    def set_usn_paid(self, usn):
+        self.__usn_paid = usn
 
     def get_revenue(self):
         return self.__revenue
@@ -31,7 +52,7 @@ class TaxProfile():
         else:
             self.__pfr = self.PFR
 
-        self.__pfr = float(self.__pfr - self.__pfr_paid) / (5 - self.__kvartal)
+        self.__pfr = float(self.__pfr - self.__pfr_paid) / (5 - self.kvartal)
         if self.__pfr < 0:
             self.__pfr = 0
 
@@ -39,7 +60,7 @@ class TaxProfile():
         return round(self.__pfr, 2)
 
     def set_oms(self):
-        self.__oms = (float(self.OMS) - self.__oms_paid) / (5 - self.__kvartal)
+        self.__oms = (float(self.OMS) - self.__oms_paid) / (5 - self.kvartal)
         if self.__oms < 0:
             self.__oms = 0
 
@@ -54,10 +75,7 @@ class TaxProfile():
             self.__usn = 0
 
     def set_revenue(self, revenue):
-        if revenue <= 0:
-            revenue = 0
-        else:
-            self.__revenue = revenue + self.__revenue_last
+        self.__revenue = revenue + self.get_revenue_last()
 
         self.set_pfr()
         self.set_oms()
