@@ -1,7 +1,7 @@
 # Tax calculator
 Tax calculator for Russian organisations which use USN.
 
-`Please, help us to test v0.94` 
+`Please, help us to test v0.95` 
 ## Description
 Biggest part of russian companies use USN-tax and they have only one employee. They are freelancers, computer masters, plumbers and so on.
 
