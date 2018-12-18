@@ -80,14 +80,6 @@ class Example(Frame, TaxProfile):
         button.pack()
 
     def output(self, event):
-        # top = Toplevel()
-        # top.title("About this application...")
-
-        # msg = Message(top, text="Some testing stuff, nothing to do here")
-        # msg.pack()
-
-        # button = Button(top, text="Dismiss", command=top.destroy)
-        # button.pack()
 
         default = "0"
         self.entry_fond["text"] = default
