@@ -12,62 +12,72 @@ class Example(Frame, TaxProfile):
         self.parent = parent
         self.initUI()
 
-    def get_those_numbers(self):
-                self.set_revenue_last(int(self.entry1.get()))
-                self.set_usn_paid(int(self.entry2.get()))
-                self.set_oms_paid(int(self.entry3.get()))
-                self.set_pfr_paid(int(self.entry4.get()))
-                self.top.destroy()
+    def get_those_numbers(self, event):
+        try:
+            self.set_revenue_last(int(self.entry1.get()))
+            self.set_usn_paid(int(self.entry2.get()))
+            self.set_oms_paid(int(self.entry3.get()))
+            self.set_pfr_paid(int(self.entry4.get()))
+        except ValueError:
+            mb.showerror("Error", "Введите все данные числами")
+            return
+        self.top.destroy()
 
     def kvartal_windows(self):
-
-        self.kvartal = int(self.entry_kvartal.get())
-
+        try:
+            self.kvartal = int(self.entry_kvartal.get())
+        except ValueError:
+            mb.showerror("Error", "Введите квартал числом (1-4)")
+        if self.kvartal < 1 or self.kvartal > 4:
+            mb.showerror("Error", "Введите квартал числом (1-4)")
+            return
         self.top_start.destroy()
 
         if self.kvartal == 1:
             return
 
-        try:
-            self.top = Toplevel()
-            self.top.title("Начало работы")
-            label1 = Message(
-                self.top, text="Данные за предыдущие кварталы")
-            label1.pack()
+        self.top = Toplevel(width=650, height=250)
+        self.top.minsize(200, 400)
+        self.top.title("Начало работы")
+        label1 = Message(
+            self.top, text="Данные за предыдущие кварталы", bg="lightblue", bd=5,
+            relief="groove", font=("Helvetica", 12))
+        label1.pack()
 
-            label2 = Message(self.top, text="Введите доход:")
-            label2.pack()
-            self.entry1 = Entry(self.top)
-            self.entry1.pack()
+        label2 = Message(self.top, text="Введите доход:", bg="lightblue", bd=5,
+                         relief="groove", font=("Helvetica", 12))
+        label2.pack()
+        self.entry1 = Entry(self.top)
+        self.entry1.pack()
 
-            label3 = Message(self.top, text="Введите УСН:")
-            label3.pack()
-            self.entry2 = Entry(self.top)
-            self.entry2.pack()
+        label3 = Message(self.top, text="Введите УСН:", bg="lightblue", bd=5,
+                         relief="groove", font=("Helvetica", 11))
+        label3.pack()
+        self.entry2 = Entry(self.top)
+        self.entry2.pack()
 
-            label4 = Message(self.top, text="Введите ПФР:")
-            label4.pack()
-            self.entry3 = Entry(self.top)
-            self.entry3.pack()
+        label4 = Message(self.top, text="Введите ПФР:", bg="lightblue", bd=5,
+                         relief="groove", font=("Helvetica", 11))
+        label4.pack()
+        self.entry3 = Entry(self.top)
+        self.entry3.pack()
 
-            label5 = Message(self.top, text="Введите ФФОМС:")
-            label5.pack()
-            self.entry4 = Entry(self.top)
-            self.entry4.pack()
+        label5 = Message(self.top, text="Введите ФФОМС:", bg="lightblue", bd=5,
+                         relief="groove", font=("Helvetica", 11))
+        label5.pack()
+        self.entry4 = Entry(self.top)
+        self.entry4.pack()
 
-            button = Button(self.top, text="Дальше",
-                            command=self.get_those_numbers())
-            button.pack()
-
-        except ValueError:
-            mb.showerror("Error", "Введите число в графу доход")
+        button = Button(self.top, text="Далее")
+        button.pack()
+        button.bind("<Button-1>", self.get_those_numbers)
 
     def start_window(self):
-        def closing(self):
-            self.top_start.destroy()
 
         self.top_start = Toplevel()
         self.top_start.title("Начало работы")
+        self.top_start.minsize(150, 100)
+        self.top_start.maxsize(150, 100)
 
         msg = Message(self.top_start, text="Введите текущий квартал")
         msg.pack()
@@ -75,7 +85,7 @@ class Example(Frame, TaxProfile):
         self.entry_kvartal.pack()
 
         button = Button(
-            self.top_start, text="С учетом предыдущих кварталов",
+            self.top_start, text="Далее",
             command=self.kvartal_windows)
         button.pack()
 

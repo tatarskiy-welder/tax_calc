@@ -1,7 +1,6 @@
 # Tax calculator
 Tax calculator for Russian organisations which use USN.
-
-`Please, help us to test v0.95` 
+ 
 ## Description
 Biggest part of russian companies use USN-tax and they have only one employee. They are freelancers, computer masters, plumbers and so on.
 
@@ -17,7 +16,9 @@ So we made a small program, that will do it for you. Only one input: your income
 3. Pay your taxes
 
 ## Changelog
-v. 0.96 - Fully-tested version with temporary GUI
+v. 1.0 - Release
+
+v. 0.96 - Minor bug fixes
 
 v. 0.95 - Untested pre-release version
 
